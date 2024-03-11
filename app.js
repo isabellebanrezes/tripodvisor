@@ -40,7 +40,7 @@ newsletterClick.addEventListener("click", (e) => {
 
 // ----------------           Etape 1        ----------------------------
 
-// On cache le formulaire d'inscription à la newsletter qui apparait par défault :
+// On cache le formulaire d'inscription à la newsletter qui apparait par défault sur la page du site  :
 
 const formNewsletter = document.querySelector(".newsletter");
 formNewsletter.classList.add("newsletter--hidden");
@@ -73,3 +73,15 @@ buttonCLoseForm.addEventListener("click", (e) => {
 });
 
 // ----------------           Etape 4      ----------------------------
+
+// On fait apparaitre le formulaire quand on scroll la page d'accueil à 300px
+
+// On pose un écouteur sur la fenêtre pour écouteur l'event "srcoll":
+window.addEventListener("scroll", scrollForm);
+
+// On fait une fonction pour cibler le scroll de la page à 300px :
+function scrollForm(e) {
+  if (window.scrollY > 300) {
+    formNewsletter.classList.remove("newsletter--hidden");
+  }
+}
