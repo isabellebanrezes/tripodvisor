@@ -55,5 +55,5 @@ const appli = {
   },
 };
 
-// Je lance l'application init()
+// ---------------Je lance l'application init()---------------------------------
 appli.init();
