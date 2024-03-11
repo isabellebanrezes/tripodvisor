@@ -1,34 +1,75 @@
-/* #### On veut que le formulaire d'inscription à la newsletter n'apparaisse que si on clique sur le lien "newsletter" dans le menudu haut ########  */
+/* #### On veut que le formulaire d'inscription à la newsletter n'apparaisse que si on clique sur le lien "newsletter" dans le menu du haut ########  */
 
-// On va créer une fonction pour réaliser cela :
+/*################################################################ */
+// On rajoute un "id" unique au niveau du menu newletter "id = menu-newsletter" pour pouvoir le distinguer des autres item du menu et bien le cibler!
+/*################################################################ */
 
-// Etape 1 : on cible le lien "newsletter" en haut du menu
-// Etape 2 : on pose un écouteur de clic
-// Etape 3 : on affiche la class du formulaire d'inscription
+//------------------------------------------------------------------
+// Etape 1 : on cache le formulaire d'inscription
+// Etape 2 : on pose un ecouteur d'event sur le menu newsletter pour faire apparaitre le formulaire d'inscription
+// Etape 3 : on pose un ecouteur d'event sur la croix du formulaire pour faire disparaitre le formulaire d'inscription
+// Etape 4 : on pose un écouteur d'event quand on scroll à 300px
+//------------------------------------------------------------------
 
-// Creation de la fonction
+// Clic sur Newsletter et l'enveloppe de la balise "a" du menu en haut
 
-// Clic sur le logo enveloppe
-/* document.querySelector(".icon-mail").addEventListener("click", (e) => {
+// On cible l'id menu-newsletter :
+/* document.getElementById("menu-newsletter").addEventListener("click", (e) => {
   e.preventDefault();
-  console.log("tu as cliqué sur le logo de la newsletter en haut du menu");
+  console.log("tu as cliqué sur newsletter");
 });
-
-// Clic sur "newsletter" du menu en haut
-// Il faut ajouter une class à newsletter pour le cibler
-// Je cible l'endroit où je veux ajouter une class
-document.querySelector;
 */
 
-// Clic sur le texte "newsletter" "<a>"
-document.getElementById("menu-newsletter").addEventListener("click", (e) => {
+// Variante avec une constante :
+/* const newsletterClick = document.getElementById("menu-newsletter");
+// On ajoute un écouteur d'évènement type "click" à notre cible :
+newsletterClick.addEventListener("click", (e) => {
   e.preventDefault();
-  console.log(
-    "tu as cliqué sur la div newletter logo et texte de la newsletter en haut du menu"
-  );
+  console.log("code en détail");
+});
+*/
+
+// Variante avec Queryselector:
+/* document.querySelector("#menu-newsletter").addEventListener("click", (e) => {
+  e.preventdefault();
+  console.log("avec queryselector");
+});
+ */
+
+// -----@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@--------------
+
+// ----------------           Etape 1        ----------------------------
+
+// On cache le formulaire d'inscription à la newsletter qui apparait par défault :
+
+const formNewsletter = document.querySelector(".newsletter");
+formNewsletter.classList.add("newsletter--hidden");
+
+// ----------------           Etape 2       ----------------------------
+
+//On fait apparaitre le formulaire d'inscription à la newsletter quand on clique sur "newsletter" dans le menu
+
+// On cible l'élément choisi : newsletter du menu en haut :
+const newsletterClick = document.getElementById("menu-newsletter");
+// On ajoute un écouteur d'évènement type "click" à notre cible :
+newsletterClick.addEventListener("click", (e) => {
+  e.preventDefault();
+  console.log("code en détail");
+  formNewsletter.classList.remove("newsletter--hidden");
 });
 
-// Clic sur "newsletter" du menu en haut
-// Il faut ajouter une class à newsletter pour le cibler
-// Je cible l'endroit où je veux ajouter une class
-document.querySelector;
+// ----------------           Etape 3      ----------------------------
+
+// On fait disparaître le formulaire en cliquant sur la croix du formulaire: on pose un ecouteur d'event sur la croix du formulaire
+
+// On cible la croix du formulaire :
+const buttonCLoseForm = document.querySelector(".newsletter__close");
+console.log(buttonCLoseForm);
+
+// On pose un écouteur d'event sur la croix
+buttonCLoseForm.addEventListener("click", (e) => {
+  console.log("j'appuie sur la croix du formulaire d'inscription");
+  formNewsletter.classList.add("newsletter--hidden");
+});
+
+// ----------------           Etape 4      ----------------------------
