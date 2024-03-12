@@ -9,6 +9,7 @@
 // Etape 2 : on pose un ecouteur d'event sur le menu newsletter pour faire apparaitre le formulaire d'inscription
 // Etape 3 : on pose un ecouteur d'event sur la croix du formulaire pour faire disparaitre le formulaire d'inscription
 // Etape 4 : on pose un écouteur d'event quand on scroll à 300px
+// Etape 5 : on veut interdire les adresses emails "fausses" dans le formulaire d'inscription et afficher un message d'erreur
 //------------------------------------------------------------------
 
 // Clic sur Newsletter et l'enveloppe de la balise "a" du menu en haut
@@ -44,6 +45,20 @@ newsletterClick.addEventListener("click", (e) => {
 
 const formNewsletter = document.querySelector(".newsletter");
 formNewsletter.classList.add("newsletter--hidden");
+
+const fordiddenDomains = [
+  "@yopmail.com",
+  "@yopmail.fr",
+  "@yopmail.net",
+  "@cool.fr.nf",
+  "@jetable.fr.nf",
+  "@courriel.fr.nf",
+  "@moncourrier.fr.nf",
+  "@monemail.fr.nf",
+  "@monmail.fr.nf",
+  "@hide.biz.st",
+  "@mymail.infos.st",
+];
 
 // ----------------           Etape 2       ----------------------------
 
@@ -85,3 +100,7 @@ function scrollForm(e) {
     formNewsletter.classList.remove("newsletter--hidden");
   }
 }
+
+//----------------------    Etape 5 -------------------------------------
+
+// On veut interdire les adresses emails "fausses"
