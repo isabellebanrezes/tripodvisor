@@ -104,3 +104,29 @@ function scrollForm(e) {
 //----------------------    Etape 5 -------------------------------------
 
 // On veut interdire les adresses emails "fausses"
+
+// On va cibler l'input du formulaire d'inscription qui a l'id "subscriber-email"
+
+const userInput = document.getElementById("subscriber-email");
+
+// On pose un event et on va récupérer l'email
+userInput.addEventListener("input", (e) => {
+  console.log(e.target.value);
+});
+
+// On vérifie si l'email du l'user n'est pas interdit
+// On créé une fonction
+
+// fonction qui teste les nom de domaines
+function testDomains(emailExtension) {
+  // pour chaque nom de domaine de la liste forbiddenDomains (liste des domaines interdit)
+  for (const extension of forbiddenDomains) {
+    // si un nom de domaine des users est inclus dans cette liste
+    if (emailExtension.includes(extension)) {
+      // on retroune vraie
+      return true;
+    }
+    //sinon on retourne faux
+    return false;
+  }
+}
