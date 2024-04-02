@@ -96,7 +96,7 @@ window.addEventListener("scroll", scrollForm);
 
 // On fait une fonction pour cibler le scroll de la page à 300px :
 function scrollForm(e) {
-  if (window.scrollY > 300) {
+  if (window.scrollY > 600) {
     formNewsletter.classList.remove("newsletter--hidden");
   }
 }
