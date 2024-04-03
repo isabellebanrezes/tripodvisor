@@ -62,9 +62,9 @@ const appli = {
     appli.formNewsletter.classList.add("newsletter--hidden");
   },
 
-  // On fait une fonction pour cibler le scroll de la page à 300px :
+  // Fonction N°4 - On fait une fonction pour cibler le scroll de la page à 300px :
   scrollForm: function (e) {
-    if (window.scrollY > 500) {
+    if (window.scrollY > 700) {
       appli.formNewsletter.classList.remove("newsletter--hidden");
     }
   },
