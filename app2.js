@@ -53,7 +53,7 @@ newsletterClick.addEventListener("click", (e) => {
 
 // tableau des noms de domaines interdits dans le formulaire d'inscription à la newletter
 
-const fordiddenDomains = [
+const forbiddenDomains = [
   "@yopmail.com",
   "@yopmail.fr",
   "@yopmail.net",
@@ -70,23 +70,27 @@ const fordiddenDomains = [
 // On créé une fonction "initiale" qui va permettre d'afficher ou cacher le formulaire d'inscription de la newsletter
 // Nom de cette fonction = "initiale()"
 
-// On cible le formulaire d'inscription à la newsletter dont la class est "newsletter"
-let formNewsletter = document.querySelector(".newsletter");
-
 function initiale() {
-  // On cible "newsletter" dans le menu en haut à droite de la page d'accueil et on ajoute un evenement et une fonction
+  // Ecouteur d'event sur "newsletter" du menu en haut à droite
   document
     .getElementById("menu-newsletter")
     .addEventListener("click", clickFormNewsletter);
-  // On cible la croix du formulaire d'inscription et on ajoute un evenement et une fonction
+
+  // Ecouteur d'event sur la croix du formulaire d'inscription de la newsletter
   document
     .querySelector(".newsletter__close")
     .addEventListener("click", clickFormNewsletter);
 
+  // Ecouteur d'event quand on scroll
   window.addEventListener("scroll", scrollFormNewsletter);
+
+  //Ecouteur d'event quand on valide le formulaire d'inscription à la nwsletter
+  document
+    .getElementById("newsletter--form")
+    .addEventListener("submit", submitForm);
 }
 
-// #########  CREATION DE LA FONCTION clickFormNewsletter ##########################################
+// #########  CREATION DE LA FONCTION QUI FAIT APPARAITRE LE FORMULAIRE QUAND ON CLIQUE SUR NEWSLETTER DANS LE MENU EN HAUT A DROITE ET QUI FAIT DISPARAITRE LE FORMULAIRE QUAND ON CLIQUE SUR LA CROIX   ################
 
 // On rajoute la class "newsletter--hidden" dans le fichier HTML au niveau de la balise du formulaire d'inscription à la newsletter
 
@@ -113,7 +117,7 @@ function clickFormNewsletter(e) {
   }
 }
 
-// ##### CREATION DE LA FONCTION scrollFormNewsletter ######################################
+// ##### CREATION DE LA FONCTION QUI FAIT APPARAITRE LE FORMULAIRE LORS DU SCROLL ########################
 
 // On créé une fonction qui va faire apparaitre le formulaire d'inscription à la newsletter quand on scroll à plus de 700 pixel
 
@@ -126,69 +130,28 @@ function scrollFormNewsletter() {
   }
 }
 
-initiale();
+// ######################################        BONUS 1       ###########################################
 
-// ----------------           Etape 2       ----------------------------
+// ######## CREATION DE LA FONCTION QUI CONTROLE LES NOM DE DOMAINE DES ADRESSES EMAILS ###################
 
-//On fait apparaitre le formulaire d'inscription à la newsletter quand on clique sur "newsletter" dans le menu
-
-/* On cible l'élément choisi : newsletter du menu en haut :
-const newsletterClick = document.getElementById("menu-newsletter");
-// On ajoute un écouteur d'évènement type "click" (on aurait pu mettre au survol de la souris - mouseover) à notre cible :
-newsletterClick.addEventListener("click", (e) => {
-  e.preventDefault();
-  console.log("j'appuie sur newsletter en haut du menu");
-  // On fait apparaitre le formulaire en rajoutant la class "newletter--hidden" qui ne cache plus le formulaire
-  formNewsletter.classList.remove("newsletter--hidden");
-});
-*/
-
-// ----------------           Etape 3      ----------------------------
-
-// On fait disparaître le formulaire en cliquant sur la croix du formulaire: on pose un ecouteur d'event sur la croix du formulaire
-
-// On cible la croix du formulaire :
-//const buttonCLoseForm = document.querySelector(".newsletter__close");
-//console.log(buttonCLoseForm);
-
-// On pose un écouteur d'event sur la croix
-//buttonCLoseForm.addEventListener("click", (e) => {
-//console.log("j'appuie sur la croix du formulaire d'inscription");
-
-//formNewsletter.classList.add("newsletter--hidden");
-//});
-
-// ----------------           Etape 4      ----------------------------
-
-// On fait apparaitre le formulaire quand on scroll la page d'accueil à 700px
-
-/* On pose un écouteur sur la fenêtre pour écouteur l'event "srcoll":
-window.addEventListener("scroll", scrollForm);
-
-// On fait une fonction pour cibler le scroll de la page à 300px :
-function scrollForm(e) {
-  if (window.scrollY > 700) {
-    formNewsletter.classList.remove("newsletter--hidden");
+// Function quand tu valides le formulaire d'inscription à la newsletter
+function submitForm(e) {
+  event.preventDefault();
+  console.log(e.target[0].value);
+  const mailUser = e.target[0].value;
+  const domainUser = "@" + mailUser.split("@")[1];
+  console.log(domainUser);
+  const badMail = testDomains(domainUser);
+  console.log(badMail);
+  if (badMail) {
+    alert("Votre adresse n'est pas conforme !");
+  } else {
+    alert("Vous êtes bien abonné à notre newsletter !");
   }
 }
 
-//----------------------    Etape 5 -------------------------------------
-
-// On veut interdire les adresses emails "fausses"
-
-// On va cibler l'input du formulaire d'inscription qui a l'id "subscriber-email"
-
-const userInput = document.getElementById("subscriber-email");
-
-// On pose un event et on va récupérer l'email
-userInput.addEventListener("input", (e) => {
-  console.log(e.target.value);
-});
-
 // On vérifie si l'email du l'user n'est pas interdit
-// On créé une fonction
-
-// fonction qui teste les nom de domaines
+// On créé une fonction qui teste les nom de domaines
 function testDomains(emailExtension) {
   // pour chaque nom de domaine de la liste forbiddenDomains (liste des domaines interdit)
   for (const extension of forbiddenDomains) {
@@ -200,4 +163,6 @@ function testDomains(emailExtension) {
     //sinon on retourne faux
     return false;
   }
-} */
+}
+
+initiale();
