@@ -1,4 +1,4 @@
-// ############PROJET TRIPODVISOR ################### //
+// ###########################    PROJET TRIPODVISOR        ###################################### //
 
 /* #### On veut que le formulaire d'inscription à la newsletter n'apparaisse que si on clique sur le lien "newsletter" dans le menu du haut ########  */
 
@@ -6,20 +6,13 @@
 // Dans le fichier HTML, on rajoute un "id" (idendtifiant unique) au niveau du menu newsletter "id = menu-newsletter" pour pouvoir le distinguer des autres item du menu et bien le cibler !
 /*################################################################ */
 
-//------------------------------------------------------------------
-// Etape 1 : on cache le formulaire d'inscription (on ajoute un class)
-// Etape 2 : on pose un ecouteur d'event sur "newsletter" en haut du menu pour faire apparaitre le formulaire d'inscription
-// Etape 3 : on pose un ecouteur d'event sur la croix du formulaire pour faire disparaitre le formulaire d'inscription à la newsletter
-// Etape 4 : on pose un écouteur d'event quand on scroll à 300px
-// Etape 5 : on veut interdire les adresses emails "fausses" dans le formulaire d'inscription et afficher un message d'erreur
-//------------------------------------------------------------------
-
-//----------------------- 2EME PROGRAMME -------------------------------------------
+//----------------------- 2EME METHODE && BONUS -------------------------------------------
 // Etape 1 : on va créer une fonction "initiale" qui va cacher ou afficher le formulaire d'inscription
 // Etape 2 : on pose un ecouteur d'event sur "newsletter" en haut du menu pour faire apparaitre le formulaire d'inscription
 // Etape 3 : on pose un ecouteur d'event sur la croix du formulaire pour faire disparaitre le formulaire d'inscription à la newsletter
 // Etape 4 : on pose un écouteur d'event quand on scroll à 300px
 // Etape 5 : on veut interdire les adresses emails "fausses" dans le formulaire d'inscription et afficher un message d'erreur
+// Etape 6 : on met en place le slider (carrousel)
 //------------------------------------------------------------------
 
 // Clic sur "Newsletter" et l'enveloppe de la balise "a" du menu en haut
@@ -52,6 +45,8 @@ newsletterClick.addEventListener("click", (e) => {
 // ----------------           Etape 1        ----------------------------
 
 // tableau des noms de domaines interdits dans le formulaire d'inscription à la newletter
+
+const formNewsletter = document.querySelector(".newsletter");
 
 const forbiddenDomains = [
   "@yopmail.com",
@@ -157,12 +152,34 @@ function testDomains(emailExtension) {
   for (const extension of forbiddenDomains) {
     // si un nom de domaine des users est inclus dans cette liste
     if (emailExtension.includes(extension)) {
-      // on retroune vraie
+      // on retroune vrai
       return true;
+      console.log(emailExtension);
     }
     //sinon on retourne faux
     return false;
+    console.log(e.target.value);
   }
 }
+
+// ######################################        BONUS 2       ###########################################
+
+// #############################  MISE EN PLACE DU SLIDESHOW   ###########################################
+
+// On s'intéresse à l'élément slider
+// class de l'élément slider = "slider"
+// On va rajouter 3 images dans le slider
+// On a 2 chevrons sur lequel on peut cliquer et afficher une nouvelle image
+// On va poser des events sur les 2 chevrons type "click" et on affichera une image différente
+// Un chevron a gauche (précédent) et un à droite (suivant)
+
+// Il faut rajouter manuellement les images en html directement dans le fichier html
+
+// Pose click sur chevron de gauche (précédent)
+
+// on pointe le chevron de gauche
+const leftChevron = querySelector;
+
+// on créé une fonction lef
 
 initiale();

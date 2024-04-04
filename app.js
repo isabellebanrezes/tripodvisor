@@ -111,26 +111,37 @@ function scrollForm(e) {
 
 // On va cibler l'input du formulaire d'inscription qui a l'id "subscriber-email"
 
-const userInput = document.getElementById("subscriber-email");
-
-// On pose un event et on va récupérer l'email
-userInput.addEventListener("input", (e) => {
-  console.log(e.target.value);
-});
+// Function quand tu valides le formulaire d'inscription à la newsletter
+function submitForm(e) {
+  event.preventDefault();
+  console.log(e.target[0].value);
+  const mailUser = e.target[0].value;
+  const domainUser = "@" + mailUser.split("@")[1];
+  console.log(domainUser);
+  const badMail = testDomains(domainUser);
+  console.log(badMail);
+  if (badMail) {
+    alert("Votre adresse n'est pas conforme !");
+  } else {
+    alert("Vous êtes bien abonné à notre newsletter !");
+  }
+}
 
 // On vérifie si l'email du l'user n'est pas interdit
-// On créé une fonction
-
-// fonction qui teste les nom de domaines
+// On créé une fonction qui teste les nom de domaines
 function testDomains(emailExtension) {
   // pour chaque nom de domaine de la liste forbiddenDomains (liste des domaines interdit)
   for (const extension of forbiddenDomains) {
     // si un nom de domaine des users est inclus dans cette liste
     if (emailExtension.includes(extension)) {
-      // on retroune vraie
+      // on retroune vrai
       return true;
+      console.log(emailExtension);
     }
     //sinon on retourne faux
     return false;
+    console.log(e.target.value);
   }
 }
+
+initiale();
