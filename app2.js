@@ -177,9 +177,52 @@ function testDomains(emailExtension) {
 
 // Pose click sur chevron de gauche (précédent)
 
-// on pointe le chevron de gauche
-const leftChevron = querySelector;
+// On créé une fonction pour changer les images par la gauche
 
-// on créé une fonction lef
+
+// On pointe la balise slider
+let slider = document.querySelector(".slider");
+
+// Fonction qui fait tourner le slider
+function sliderShow {
+// On pointe les "chevrons"
+  let chevrons = slider.querySelectorAll(".slider__btn");
+
+  // chevrons de gauche = chevrons[0] et droite = chevrons[1]
+
+  // On pose un ecouteur d'event sur les boutons
+  chevrons[0].addEventListener('click', left());
+
+
+}
+
+
+
+// On créé une variable pour l'image courante
+let indexImageCourent = 0;
+
+// On pointe toutes les images du slideshow
+let images = slider.querySelectorAll(".slider__img");
+
+// On construit la fonction
+function left() {
+  // On créé une variable
+  let leftImage;
+  // si l'image a pour index = 0 alors notre image de gauche a pour index -1 ; car la liste des images est considérées comme un tableau
+  if (indexImageCourent === 0) {
+    leftImage = images.length - 1;
+  } else {
+    leftImage = indexImageCourent - 1;
+  }
+  // On va retirer la class "slider__img__current" à l'image en courante
+  images[indexImageCourent].classList.remove("slider__img__current");
+
+  // On va ajouter la class "slide__img__current" à l'image de droite
+  images[leftImage].classList.add("slider__img__current");
+  indexImageCourent = leftImage;
+}
+
+
+left();
 
 initiale();
