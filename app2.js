@@ -163,48 +163,43 @@ function testDomains(emailExtension) {
 }
 
 // ######################################        BONUS 2       ###########################################
-
 // #############################  MISE EN PLACE DU SLIDESHOW   ###########################################
 
-// On s'intéresse à l'élément slider
+// On s'intéresse à l'élément slider - le carrousel
 // class de l'élément slider = "slider"
-// On va rajouter 3 images dans le slider
+// On va rajouter 4 images dans le slider
 // On a 2 chevrons sur lequel on peut cliquer et afficher une nouvelle image
-// On va poser des events sur les 2 chevrons type "click" et on affichera une image différente
+// On va poser des events sur les 2 chevrons type "click" et on affichera une image différente à chaque click sur les chevrons
 // Un chevron a gauche (précédent) et un à droite (suivant)
 
-// Il faut rajouter manuellement les images en html directement dans le fichier html
+// Il faut rajouter manuellement les images en html directement dans le fichier html au niveau de la balise slider
 
-// Pose click sur chevron de gauche (précédent)
-
-// On créé une fonction pour changer les images par la gauche
-
-
-// On pointe la balise slider
+// On pointe la balise slider (le carroussel)
 let slider = document.querySelector(".slider");
 
-// Fonction qui fait tourner le slider
-function sliderShow {
-// On pointe les "chevrons"
+// Fonction qui fait tourner le carroussel
+function sliderShow() {
+  // On pointe les boutons "chevrons"
   let chevrons = slider.querySelectorAll(".slider__btn");
 
   // chevrons de gauche = chevrons[0] et droite = chevrons[1]
 
-  // On pose un ecouteur d'event sur les boutons
-  chevrons[0].addEventListener('click', left());
-
-
+  // On pose un ecouteur d'evenment quand on click sur les 2 boutons
+  chevrons[0].addEventListener("click", clickSliderButton);
+  chevrons[1].addEventListener("click", clickSliderButton);
 }
 
+// ####################   Pose click sur chevron de gauche (précédent)   #################
 
+// On créé une fonction pour changer les images par la gauche
 
 // On créé une variable pour l'image courante
 let indexImageCourent = 0;
 
-// On pointe toutes les images du slideshow
+// On pointe toutes les images du slide-show
 let images = slider.querySelectorAll(".slider__img");
 
-// On construit la fonction
+// On construit la fonction du bouton de gauche
 function left() {
   // On créé une variable
   let leftImage;
@@ -215,14 +210,47 @@ function left() {
     leftImage = indexImageCourent - 1;
   }
   // On va retirer la class "slider__img__current" à l'image en courante
-  images[indexImageCourent].classList.remove("slider__img__current");
+  images[indexImageCourent].classList.remove("slider__img--current");
 
-  // On va ajouter la class "slide__img__current" à l'image de droite
-  images[leftImage].classList.add("slider__img__current");
+  // On va ajouter la class "slide__img__current" à l'image de gauche
+  images[leftImage].classList.add("slider__img--current");
   indexImageCourent = leftImage;
 }
 
+// ####################   Pose click sur chevron de droite (suivant)   ######################
 
-left();
+// On créé une fonction pour changer les images par la droite
 
+function right() {
+  let rightImage;
+  if (indexImageCourent + 1 >= images.length) {
+    rightImage = 0;
+  } else {
+    rightImage = indexImageCourent + 1;
+  }
+
+  // On retire la class "slider__img__current" a l'image en courante
+  images[indexImageCourent].classList.remove("slider__img--current");
+  // On ajoute la class "slider__img__current" à l'image de droite
+  images[rightImage].classList.add("slider__img--current");
+  indexImageCourent = rightImage;
+}
+
+// ################   Fonction pour activer les click sur les chevrons ###############
+
+function clickSliderButton(e) {
+  let direction = e.target.getAttribute("aria-label");
+  console.log(direction);
+
+  if (direction === "Suivant") {
+    right();
+  } else {
+    left();
+  }
+}
+
+// On lance la fonction du formulaire d'inscription de la newsletter
 initiale();
+
+// On lance la fonction pour faire tourner le carrousel
+sliderShow();
